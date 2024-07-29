@@ -173,6 +173,8 @@ p {
 }
 
 .form {
+  max-width: 600px;
+  box-sizing: border-box;
   --offset-shadow: 0 0 #0000;
   --shadow: 0 20px 25px -5px rgb(0 0 0 / .1), 0 8px 10px -6px rgb(0 0 0 / .1) !important;
   box-shadow: var(--offset-shadow, 0 0 #0000), var(--offset-shadow, 0 0 #0000), var(--shadow);

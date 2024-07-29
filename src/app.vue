@@ -3,14 +3,11 @@ const config = useSiteConfig()
 </script>
 <template>
   <n-config-provider
-      class="w-full h-full" inline-theme-disabled
+      class="w-full h-full"
+      :inline-theme-disabled="true"
   >
     <NuxtLayout>
-<!--      <naive-provider>-->
         <NuxtPage />
-        <Watermark :show-watermark="config.showWatermark"/>
-<!--      </naive-provider>-->
-
     </NuxtLayout>
   </n-config-provider>
 </template>
