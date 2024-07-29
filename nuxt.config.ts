@@ -5,6 +5,7 @@ import { NaiveUiResolver } from 'unplugin-vue-components/resolvers'
 
 export default defineNuxtConfig({
   compatibilityDate: '2024-04-03',
+  components:true,
   devtools: { enabled: true },
   modules: ['nuxtjs-naive-ui','@unocss/nuxt'],
   css: ['animate.css'],
@@ -31,5 +32,8 @@ export default defineNuxtConfig({
         resolvers: [NaiveUiResolver()]
       })
     ]
+  },
+  nitro: {
+    preset: 'node-server'
   }
 })
