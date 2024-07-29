@@ -11,14 +11,18 @@
   },
   "dependencies": {
     "@vicons/ionicons5": "^0.12.0",
+    "animate.css": "3",
     "naive-ui": "^2.39.0",
     "nuxt": "^3.12.4",
     "nuxtjs-naive-ui": "^1.0.2",
+    "svg-captcha": "^1.4.0",
     "unplugin-auto-import": "^0.18.2",
     "unplugin-vue-components": "^0.27.3",
+    "vfonts": "^0.0.3",
     "vue": "latest"
   },
   "devDependencies": {
     "@unocss/nuxt": "^0.61.6"
-  }
+  },
+  "packageManager": "yarn@1.22.22+sha512.a6b2f7906b721bba3d67d4aff083df04dad64c399707841b7acf00f6b133b7ac24255f2652fa22ae3534329dc6180534e98d17432037ff6fd140556e2bb3137e"
 }

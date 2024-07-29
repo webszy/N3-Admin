@@ -1,15 +1,41 @@
+<script lang="ts" setup>
+const config = useSiteConfig()
+</script>
 <template>
-  <NuxtLayout>
-    <NuxtPage />
-  </NuxtLayout>
+  <n-config-provider
+      class="w-full h-full" inline-theme-disabled
+  >
+    <NuxtLayout>
+<!--      <naive-provider>-->
+        <NuxtPage />
+        <Watermark :show-watermark="config.showWatermark"/>
+<!--      </naive-provider>-->
+
+    </NuxtLayout>
+  </n-config-provider>
 </template>
 <style>
-html,body,#__nuxt{
+@import "vfonts/Roboto.css";
+html, body, #__nuxt {
   width: 100%;
   height: 100%;
 }
-body{
+
+body {
   margin: 0;
   padding: 0;
 }
+
+</style>
+<style scoped>
+ html:deep(.n-input .n-input__input-el::placeholder){
+   -webkit-text-fill-color: transparent !important;
+   opacity: 1;
+   color:#9ca3af;
+   font-size: 18px;
+ }
+ html:deep(.n-input .n-input__input-el::-internal-input-suggested){
+   color:#9ca3af;
+   background: transparent;
+ }
 </style>

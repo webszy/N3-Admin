@@ -7,13 +7,10 @@ export default defineNuxtConfig({
   compatibilityDate: '2024-04-03',
   devtools: { enabled: true },
   modules: ['nuxtjs-naive-ui','@unocss/nuxt'],
+  css: ['animate.css'],
   srcDir: 'src/',
-  dir:{
-    pages:'src/pages',
-    layouts:'src/layouts',
-    assets:'src/assets',
-    composables:'src/composables',
-    public:'src/public',
+  alias:{
+    '@config':'/src/config'
   },
   vite: {
     plugins: [
@@ -30,6 +27,7 @@ export default defineNuxtConfig({
         ]
       }),
       Components({
+
         resolvers: [NaiveUiResolver()]
       })
     ]
