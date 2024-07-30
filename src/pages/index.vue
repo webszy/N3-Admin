@@ -1,9 +1,9 @@
 <script setup lang="ts">
-
+const router = useRouter()
 </script>
 
 <template>
-  <n-button>Default</n-button>
+  <NButton size="large" type="success" @click="router.push('/config/domain')">域名管理</NButton>
 </template>
 
 <style scoped>

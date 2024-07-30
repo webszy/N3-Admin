@@ -1,20 +1,22 @@
 <script setup lang="ts">
 import {LockClosedOutline, LogoFacebook, LogoGithub, LogoWechat, PersonOutline,LogoGoogle} from '@vicons/ionicons5'
-import {useLogin} from "~/composables/useLogin";
+import {naiveMessage} from "~/composables/useNaiveAPI";
 
-defineOptions({
-  name: 'Login'
-})
 definePageMeta({
   layout: false,
+  meta:{
+    title: 'Login',
+  }
 });
+const env = useRuntimeConfig()
+const config = useSiteConfig()
 // onNuxtReady(() => {
 //   setInterval(() => {
 //     isBounce.value = !isBounce.value;
 //   }, 1000)
 // })
 //https://plus.naiveadmin.com/login-v4
-const config = useSiteConfig();
+const router = useRouter()
 const icon = computed(() => `url(${unref(config).icon})`)
 const isBounce = ref(false)
 const loginData = reactive({
@@ -28,12 +30,23 @@ const rules = {
 }
 const formRef = ref(null)
 const loading = ref(false)
-const handleLogin = async () => {
-  loading.value = true
-  useLogin(loginData)
-  const data = await $fetch('/api/auth', {method: 'post', body: loginData})
+const handleLogin =  () => {
+  unref(formRef).validate((errors) => {
+    if (!errors) {
+      loading.value = true
+      useLogin(loginData,env.public.sha256_secret)
+          .then(({status,data}) => {
+            if(status === 'success') {
+              naiveMessage.success('Login success')
+              localStorage.setItem('token', data.token)
+              router.push('/')
+            }
+          })
+          .finally(() => {
+            loading.value = false
+          })
+    }})
 
-  loading.value = false
 }
 
 </script>

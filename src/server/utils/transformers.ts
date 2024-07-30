@@ -7,9 +7,13 @@ export const defineWrappedResponseHandler = <T extends EventHandlerRequest, D> (
         try {
             // 在路由处理程序之前执行某些操作
             const response = await handler(event)
+            const status = getResponseStatus(event)
             console.log('utils.response', response)
             // 在路由处理程序之后执行某些操作
-            return { response }
+            return { 
+                status:status === 200? 'success' : 'failed',
+                data:response
+            }
         } catch (err) {
             // 错误处理
             return { err }
