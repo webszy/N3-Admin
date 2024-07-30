@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import {LockClosedOutline, LogoFacebook, LogoGithub, LogoWechat, PersonOutline} from '@vicons/ionicons5'
+import {LockClosedOutline, LogoFacebook, LogoGithub, LogoWechat, PersonOutline,LogoGoogle} from '@vicons/ionicons5'
+import {useLogin} from "~/composables/useLogin";
 
 defineOptions({
   name: 'Login'
@@ -22,15 +23,16 @@ const loginData = reactive({
   autoLogin: false
 })
 const rules = {
-  username: {require: true, trigger: 'blur', message: 'Username is required'},
-  password: {require: true, trigger: 'blur', message: 'Password is required'}
+  username: [{require: true, trigger: 'blur', message: 'Username is required'}],
+  password: [{require: true, trigger: 'blur', message: 'Password is required'}]
 }
 const formRef = ref(null)
 const loading = ref(false)
 const handleLogin = async () => {
   loading.value = true
+  useLogin(loginData)
   const data = await $fetch('/api/auth', {method: 'post', body: loginData})
-  $fetch('/api/auth/code')
+
   loading.value = false
 }
 
@@ -44,7 +46,7 @@ const handleLogin = async () => {
       <img src="@/assets/svg/logo-left.svg">
     </div>
     <div class="login-form flex-1 flex justify-center items-center">
-      <div class="form w-1/3 bg-white flex flex-col justify-between items-center">
+      <div class="form bg-white flex flex-col justify-between items-center">
         <img class="animated bounce infinite anima" :style="{animationPlayState: isBounce ? 'running' : 'paused' }"
              src="@/assets/svg/boy.svg">
         <n-form
@@ -64,7 +66,7 @@ const handleLogin = async () => {
                 size="large"
                 class="w-full"
                 style="--n-height: 40px;"
-                :input-props="{autocomplete: 'new-username'}"
+                :input-props="{autocomplete: 'off'}"
             >
               <template #prefix>
                 <n-icon size="18" color="#808695">
@@ -84,7 +86,7 @@ const handleLogin = async () => {
                 type="password"
                 style="--n-height: 40px;"
                 show-password-on="mousedown"
-                :input-props="{autocomplete: 'off'}"
+                :input-props="{autocomplete: 'new-password'}"
             >
               <template #prefix>
                 <n-icon size="18" color="#808695">
@@ -112,11 +114,18 @@ const handleLogin = async () => {
         <n-divider>
           <span>More</span>
         </n-divider>
-        <div class="flex w-1/2 justify-around items-center">
+        <div class="flex w-2/3 justify-around items-center">
           <n-button strong secondary circle type="success" size="large">
             <template #icon>
               <n-icon>
                 <LogoWechat/>
+              </n-icon>
+            </template>
+          </n-button>
+          <n-button strong secondary circle  size="large">
+            <template #icon>
+              <n-icon>
+                <LogoGoogle/>
               </n-icon>
             </template>
           </n-button>

@@ -1,4 +1,9 @@
+interface IAuthPostBody {
+    username: string;
+    password: string;
+    autoLogin?: boolean;
+}
 export default defineEventHandler(async (event) => {
-    const body = await readBody(event)
-    return body
+    const {username, password,autoLogin} = await readBody<IAuthPostBody>(event)
+    return {username, password,autoLogin}
 })
