@@ -6,9 +6,9 @@ import AppFooter from "~/layouts/components/AppFooter.vue";
 </script>
 
 <template>
-  <main class="container w-full h-full flex flex-col justify-between items-center">
+  <main class="app-container w-full h-full flex flex-col justify-between items-center">
     <AppHeader />
-    <div class="app-content w-full flex-1 px-2 box-border overflow-y-auto scroll-smooth">
+    <div class="app-content w-full flex-1 box-border overflow-y-auto scroll-smooth">
       <n-layout has-sider class="h-full">
         <n-layout-sider
             collapse-mode="transform"
