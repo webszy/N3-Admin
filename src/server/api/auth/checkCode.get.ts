@@ -1,7 +1,8 @@
 import captchaCodes from "~/database/schemas/CaptchaCodes";
 import {connectDB} from "~/database";
+import {defineWrappedResponseHandler} from "~/server/utils/transformers";
 
-export default defineEventHandler(async (event) => {
+export default defineWrappedResponseHandler(async (event) => {
     const {code} = getQuery(event)
     const id = getCookie(event, "code_id")
     if(!code){

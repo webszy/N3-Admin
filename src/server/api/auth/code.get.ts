@@ -1,5 +1,4 @@
 import Captcha from 'svg-captcha-fixed'
-import {nanoid} from 'nanoid'
 import CaptchaModel from "@/database/schemas/CaptchaCodes";
 import {connectDB} from "@/database";
 
