@@ -1,15 +1,32 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 import AutoImport from 'unplugin-auto-import/vite'
 import Components from 'unplugin-vue-components/vite'
-import {NaiveUiResolver} from 'unplugin-vue-components/resolvers'
-import {resolve,dirname} from 'node:path'
+import {NaiveUiResolver,VarletUIResolver} from 'unplugin-vue-components/resolvers'
+import {dirname} from 'node:path'
 import {fileURLToPath}  from 'node:url'
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = dirname(__filename)
 export default defineNuxtConfig({
+    nitro: {
+        preset: 'node-server',
+        experimental:{
+            openAPI: {
+                ui: {
+                    scalar:{
+                        theme: 'purple'
+                    }
+                },
+                meta: {
+                    title: 'My Awesome Project',
+                    description: 'This might become the next big thing.',
+                    version: '1.0'
+                }
+            }
+        }
+    },
     compatibilityDate: '2024-04-03',
     devtools: {enabled: true},
-    modules: ['nuxtjs-naive-ui', '@unocss/nuxt'],
+    modules: ['nuxtjs-naive-ui', '@unocss/nuxt', "@varlet/nuxt"],
     css: ['animate.css'],
     srcDir: 'src/',
     runtimeConfig:{
@@ -40,14 +57,11 @@ export default defineNuxtConfig({
             }),
             Components({
                 dts: true,
-                resolvers: [NaiveUiResolver()]
+                resolvers: [NaiveUiResolver(),VarletUIResolver()]
             })
         ],
         ssr: {
             noExternal: ['naive-ui'],
         },
-    },
-    nitro: {
-        preset: 'node-server'
     }
 })

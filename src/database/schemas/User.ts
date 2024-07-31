@@ -3,10 +3,8 @@ import * as mongoose from "mongoose";
 const UserSchema = new mongoose.Schema({
     id: String,
     name: String,
-    email: Number,
+    email: String,
     password: String,
-    createdAt: Number,
-    updatedAt: Number
-});
+},{timestamps: true});
 const UserModel = mongoose.model("users", UserSchema);
 export default UserModel;

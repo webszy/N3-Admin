@@ -1,5 +1,4 @@
 import captchaCodes from "~/database/schemas/CaptchaCodes";
-import {connectDB} from "~/database";
 import {defineWrappedResponseHandler} from "~/server/utils/transformers";
 
 export default defineWrappedResponseHandler(async (event) => {
@@ -19,7 +18,6 @@ export default defineWrappedResponseHandler(async (event) => {
             statusMessage: "Illegal Request",
         })
     }
-    await connectDB()
     const {code:realCode} = await captchaCodes.findById(id)
     setResponseStatus(event,200)
     setCookie(event, "code_id", "", {maxAge: -1})

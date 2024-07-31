@@ -16,7 +16,6 @@ const config = useSiteConfig()
 //   }, 1000)
 // })
 //https://plus.naiveadmin.com/login-v4
-const router = useRouter()
 const icon = computed(() => `url(${unref(config).icon})`)
 const isBounce = ref(false)
 const loginData = reactive({
@@ -34,12 +33,11 @@ const handleLogin =  () => {
   unref(formRef).validate((errors) => {
     if (!errors) {
       loading.value = true
-      useLogin(loginData,env.public.sha256_secret)
+      useLogin(loginData)
           .then(({status,data}) => {
             if(status === 'success') {
-              naiveMessage.success('Login success')
-              localStorage.setItem('token', data.token)
-              router.push('/')
+
+              navigateTo('/')
             }
           })
           .finally(() => {

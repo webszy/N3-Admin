@@ -1,4 +1,3 @@
-import {connectDB} from "~/database";
 import UserModel from "~/database/schemas/User";
 import {defineWrappedResponseHandler} from "~/server/utils/transformers";
 interface IAuthPostBody {
@@ -9,7 +8,6 @@ interface IAuthPostBody {
 
 export default defineWrappedResponseHandler(async (event) => {
     const {username, password, autoLogin} = await readBody<IAuthPostBody>(event)
-    await connectDB()
     const user = await UserModel.findOne({id:username})
     if(!user){
         return createError({
@@ -18,7 +16,8 @@ export default defineWrappedResponseHandler(async (event) => {
             message: "Invalid username or password"
         })
     }
-    if(process.env.NODE_ENV === 'production' && password!== user.password){
+    const checkPassword = await bcrypt.compare(password, user.password)
+    if(process.env.NODE_ENV === 'production' && checkPassword){
         return createError({
             statusCode:403,
             statusMessage: "Unauthorized",

@@ -8,18 +8,23 @@
   "scripts": {
     "build": "nuxt build",
     "dev": "nuxt dev",
+    "swagger": "open http://localhost:3000/_nitro/swagger",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
     "start": "node ./.output/server/index.mjs"
   },
   "dependencies": {
+    "@varlet/nuxt": "^0.1.5",
+    "@varlet/preset-unocss": "^3.3.10",
     "@vicons/ionicons5": "^0.12.0",
     "animate.css": "3",
+    "bcryptjs": "^2.4.3",
     "crypto-js": "^4.2.0",
     "mongoose": "^8.5.1",
     "naive-ui": "^2.39.0",
     "nuxt": "^3.12.4",
+    "nuxt-openapi-docs-module": "^5.2.11",
     "nuxtjs-naive-ui": "^1.0.2",
     "svg-captcha-fixed": "^1.5.2",
     "unplugin-auto-import": "^0.18.2",

@@ -22,7 +22,7 @@ import AppFooter from "~/layouts/components/AppFooter.vue";
           <AppMenu />
         </n-layout-sider>
         <n-layout-content content-style="padding: 10px;">
-          <NuxtPage />
+          <slot  />
         </n-layout-content>
       </n-layout>
     </div>

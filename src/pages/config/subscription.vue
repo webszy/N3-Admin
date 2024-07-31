@@ -6,7 +6,7 @@ definePageMeta({
     title: 'Domain Config',
   }
 })
-useFetch('/api/domain/1/10',{
+useFetch('/api/manager/subscription/1/10',{
   method: 'GET',
   query: {
     name:'xxx',
@@ -16,7 +16,7 @@ useFetch('/api/domain/1/10',{
 </script>
 
 <template>
-<NDataTable />
+
 </template>
 
 <style scoped>

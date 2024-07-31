@@ -1,7 +1,5 @@
-import HmacSHA512 from 'crypto-js/hmac-sha512';
-import sha1 from 'crypto-js/sha1';
-import encHex from 'crypto-js/enc-hex';
-import type {CommonResponse} from "~/types/http";
+import type {ICommonResponse} from "~/types/http";
+import {naiveMessage} from "~/composables/useNaiveAPI";
 interface LoginOptions {
     password: string;
     username: string;
@@ -10,7 +8,7 @@ interface LoginOptions {
 type roleItem = {name:string,id:string}
 type permissionItem = {id:string,type:'route'|'button',name:string}
 
-type LoginResponse =  CommonResponse<{
+type LoginResponse =  ICommonResponse<{
         token: string;
         userId:string;
         role:roleItem[];
@@ -18,15 +16,17 @@ type LoginResponse =  CommonResponse<{
 
 }>
 export async function useLogin({username, password, autoLogin=false}: LoginOptions,sha256_secret) {
-    const secret = sha1(sha256_secret)
-    const hashedPassword = HmacSHA512(password, secret).toString(encHex);
     return $fetch<LoginResponse>('/api/auth', {
         method: 'POST',
         body: {
             username,
-            password: hashedPassword,
+            password,
             autoLogin
         }
     })
+        .then(({data})=>{
+            naiveMessage.success('Login success')
+            localStorage.setItem('token', data.token)
+        })
 
 }

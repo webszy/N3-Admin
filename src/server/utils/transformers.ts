@@ -8,10 +8,17 @@ export const defineWrappedResponseHandler = <T extends EventHandlerRequest, D> (
             // 在路由处理程序之前执行某些操作
             const response = await handler(event)
             const status = getResponseStatus(event)
-            console.log('utils.response', response)
+            console.log(event.path, response)
             // 在路由处理程序之后执行某些操作
+            // 判断返回值中是否有null，处理为空字符串
+            Object.keys(response)
+                .forEach(key => {
+                if(response[key] === null){
+                    response[key] = ''
+                }
+            })
             return {
-                status:status === 200? 'success' : 'failed',
+                status:status === 200 ? 'success' : 'failed',
                 data:response
             }
         } catch (err) {
