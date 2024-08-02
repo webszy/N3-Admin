@@ -7,6 +7,13 @@ import {fileURLToPath}  from 'node:url'
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = dirname(__filename)
 export default defineNuxtConfig({
+    app: {
+        head: {
+            title:'N3-Admin-Template',
+            charset: 'utf-8',
+            viewport: 'width=device-width, initial-scale=1',
+        }
+    },
     nitro: {
         preset: 'node-server',
         experimental:{

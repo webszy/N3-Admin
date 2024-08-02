@@ -156,6 +156,7 @@ const handleLogin =  () => {
           </n-button>
         </div>
       </div>
+      <LoginForm />
     </div>
   </main>
 </template>
@@ -164,6 +165,7 @@ const handleLogin =  () => {
 .images {
   background: #e9edf7;
   box-sizing: border-box;
+  display: none;
 }
 
 h1 {

@@ -20,6 +20,7 @@ callOnce(() => {
 </template>
 <style>
 @import "vfonts/Roboto.css";
+@import '@unocss/reset/normalize.css';
 html, body, #__nuxt {
   width: 100%;
   height: 100%;
