@@ -1,12 +1,10 @@
 <script setup lang="ts">
 import {LockClosedOutline, LogoFacebook, LogoGithub, LogoWechat, PersonOutline,LogoGoogle} from '@vicons/ionicons5'
 import {naiveMessage} from "~/composables/useNaiveAPI";
-
+import type {FormInst,FormItemRule  } from 'naive-ui'
 definePageMeta({
   layout: false,
-  meta:{
-    title: 'Login',
-  }
+  title: 'Login',
 });
 const env = useRuntimeConfig()
 const config = useSiteConfig()
@@ -24,19 +22,18 @@ const loginData = reactive({
   autoLogin: false
 })
 const rules = {
-  username: [{require: true, trigger: 'blur', message: 'Username is required'}],
-  password: [{require: true, trigger: 'blur', message: 'Password is required'}]
+  username: [{required: true, trigger: 'blur', message: 'Username is required'}],
+  password: [{required: true, trigger: 'blur', message: 'Password is required'}]
 }
-const formRef = ref(null)
+const formRef = ref<FormInst | null>(null)
 const loading = ref(false)
 const handleLogin =  () => {
-  unref(formRef).validate((errors) => {
+  unref(formRef)?.validate((errors) => {
     if (!errors) {
       loading.value = true
       useLogin(loginData)
           .then(({status,data}) => {
             if(status === 'success') {
-
               navigateTo('/')
             }
           })
@@ -65,7 +62,7 @@ const handleLogin =  () => {
             ref="formRef"
             :model="loginData"
             :rules="rules"
-            label-placement="left"
+            label-placement="top"
             :show-require-mark="false"
         >
           <n-form-item
@@ -106,11 +103,14 @@ const handleLogin =  () => {
               </template>
             </n-input>
           </n-form-item>
-          <n-form-item class="default-color">
-            <n-checkbox v-model:checked="loginData.autoLogin">自动登录</n-checkbox>
-            <n-button quaternary type="primary"
-                      style="--n-color-hover:#fff;--n-color-focus:#fff;--n-color-pressed:#fff;">忘记密码
-            </n-button>
+          <n-form-item style="margin-top: calc(-1 * var(--n-feedback-height))">
+            <div class="w-full flex justify-between items-center">
+              <n-checkbox v-model:checked="loginData.autoLogin">Remember Me</n-checkbox>
+              <n-button quaternary type="primary"
+                        style="--n-color-hover:#fff;--n-color-focus:#fff;--n-color-pressed:#fff;">Forget Password?
+              </n-button>
+            </div>
+
           </n-form-item>
         </n-form>
         <n-button
@@ -156,7 +156,6 @@ const handleLogin =  () => {
           </n-button>
         </div>
       </div>
-      <LoginForm />
     </div>
   </main>
 </template>
@@ -165,7 +164,6 @@ const handleLogin =  () => {
 .images {
   background: #e9edf7;
   box-sizing: border-box;
-  display: none;
 }
 
 h1 {
@@ -196,12 +194,11 @@ p {
 
 .form {
   max-width: 600px;
-  box-sizing: border-box;
   --offset-shadow: 0 0 #0000;
   --shadow: 0 20px 25px -5px rgb(0 0 0 / .1), 0 8px 10px -6px rgb(0 0 0 / .1) !important;
   box-shadow: var(--offset-shadow, 0 0 #0000), var(--offset-shadow, 0 0 #0000), var(--shadow);
   border-radius: 20px;
-  padding: 40px 80px;
+  padding: 40px 60px;
 }
 
 .form img {

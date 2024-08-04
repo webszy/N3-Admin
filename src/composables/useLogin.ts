@@ -15,7 +15,7 @@ type LoginResponse =  ICommonResponse<{
         permissions:permissionItem[];
 
 }>
-export async function useLogin({username, password, autoLogin=false}: LoginOptions,sha256_secret) {
+export async function useLogin({username, password, autoLogin=false}: LoginOptions) {
     return $fetch<LoginResponse>('/api/auth', {
         method: 'POST',
         body: {
@@ -24,9 +24,10 @@ export async function useLogin({username, password, autoLogin=false}: LoginOptio
             autoLogin
         }
     })
-        .then(({data})=>{
+        .then(res=>{
             naiveMessage.success('Login success')
-            localStorage.setItem('token', data.token)
+            // localStorage.setItem('token', data.token)
+            return res
         })
 
 }

@@ -1,12 +1,5 @@
 <script lang="ts" setup>
-import {connectDB} from "~/database";
 
-const config = useSiteConfig()
-callOnce(() => {
-  if(import.meta.server){
-    connectDB()
-  }
-})
 </script>
 <template>
   <n-config-provider

@@ -1,0 +1,3 @@
+declare global {
+    dbIsOnline:boolean
+}

@@ -1,4 +1,5 @@
 import type { EventHandler, EventHandlerRequest } from 'h3'
+import {connectDB} from "~/database";
 
 export const defineWrappedResponseHandler = <T extends EventHandlerRequest, D> (
     handler: EventHandler<T, D>
@@ -6,7 +7,10 @@ export const defineWrappedResponseHandler = <T extends EventHandlerRequest, D> (
     defineEventHandler<T>(async event => {
         try {
             // 在路由处理程序之前执行某些操作
-            const response = await handler(event)
+            if(!global.dbIsOnline){
+                await connectDB()
+            }
+            const response:any = await handler(event)
             const status = getResponseStatus(event)
             console.log(event.path, response)
             // 在路由处理程序之后执行某些操作
