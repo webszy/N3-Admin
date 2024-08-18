@@ -8,7 +8,7 @@ type TCreateJwtOptions = {
 *   @description
 * */
 export function createJwt (info:TCreateJwtOptions): any {}
-export function verifyJwt (info:TCreateJwtOptions): any {}
+export function verifyJwt (token:string): any {}
 export function getJwtInfo (token: string): any {
     return {
         username: ''
