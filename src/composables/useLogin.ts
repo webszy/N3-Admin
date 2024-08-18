@@ -22,6 +22,9 @@ export async function useLogin({username, password, autoLogin=false}: LoginOptio
             username,
             password,
             autoLogin
+        },
+        headers:{
+           'fish-authentication-v3':'123'
         }
     })
         .then(res=>{

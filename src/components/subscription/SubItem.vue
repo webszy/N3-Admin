@@ -1,14 +1,20 @@
 <script setup lang="ts">
-const props = defineProps({
-  info:{
-    type:Object,
-  }
+enum ESubServiceLogo{
+  EMPTY = 'default',
+  WESTCN = 'westCN',
+
+}
+interface IProps {
+  logo:ESubServiceLogo
+}
+const props = withDefaults(defineProps<IProps>(),{
+  logo:ESubServiceLogo.EMPTY
 })
 </script>
 
 <template>
   <section class="sub-item">
-    <img :src="info.logo" alt="item-image">
+    <img :src="props.logo" alt="item-image">
   </section>
 </template>
 

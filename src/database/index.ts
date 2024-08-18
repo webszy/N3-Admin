@@ -1,18 +1,19 @@
 import mongoose from 'mongoose'
-global.dbIsOnline = false
+import type {ConnectOptions} from 'mongoose'
+function setValue(flag = false ){
+    (global as any).MONGO_CONNECTED = flag
+}
 export function connectDB (){
     const url = process.env.NUXT_MONGODB_URI  as string
-    const options = {
+    const options:ConnectOptions = {
         dbName:process.env.NUXT_MONGODB_DBNAME as string
     }
-    const db = mongoose.createConnection(url,options)
-    db.on('error',(err) => {
-        if(err.message && err.message.includes('not connect')){
-            global.dbIsOnline = false
-        }
-    })
-    db.once('open', () => {
-        console.log("MongoDB connection established")
-        global.dbIsOnline= true
-    })
+    return mongoose.connect(url, options)
+        .then(res=>{
+            console.log(res)
+            setValue( true)
+        })
+        .catch(err=>{
+            setValue( false)
+        })
 }

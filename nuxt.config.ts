@@ -24,8 +24,8 @@ export default defineNuxtConfig({
                     }
                 },
                 meta: {
-                    title: 'My Awesome Project',
-                    description: 'This might become the next big thing.',
+                    title: 'N3-Admin API',
+                    description: 'N3 Admin Is All In One Stack Project Build By Nuxt + Naive UI + NoSql DataBase',
                     version: '1.0'
                 }
             }
@@ -44,7 +44,7 @@ export default defineNuxtConfig({
     build: {
         transpile:
             process.env.NODE_ENV === 'production'
-                ? ['naive-ui', 'vueuc', '@css-render/vue3-ssr', '@juggle/resize-observer']
+                ? ['naive-ui', 'vueuc', '@css-nbvcxz/vue3-ssr', '@juggle/resize-observer']
                 : ['@juggle/resize-observer'],
     },
     vite: {

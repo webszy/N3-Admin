@@ -1,3 +1,5 @@
 declare global {
-    dbIsOnline:boolean
+    interface Global {
+        MONGO_CONNECTED: boolean;
+    }
 }
